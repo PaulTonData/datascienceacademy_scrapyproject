@@ -1,7 +1,7 @@
 import json
 import re
 
-f = open('raw_post_string.txt', 'r')
+f = open('posts.txt', 'r')
 s = f.read()
 f.close()
 
@@ -28,7 +28,7 @@ def clean_html(text):
 for post in posts:
     post['text'] = clean_html(post['text'])
 
-f = open('clean_raw_posts.txt', 'w')
+f = open('clean_posts.txt', 'w')
 s = json.dumps(posts)
 f.write(s)
 f.close()
