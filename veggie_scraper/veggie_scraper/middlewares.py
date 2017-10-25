@@ -6,7 +6,27 @@
 # http://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+import base64
+import random
 
+class ProxyMiddleware(object):
+    def process_request(self, request, spider):
+        proxy_list = ['*****',
+                      '*****',
+                      '*****',
+                      '*****',
+                      '*****',
+                      '*****',
+                      '*****',
+                      '*****',
+                      '*****',
+                      '*****']
+        request.meta['proxy'] = random.choice(proxy_list)
+        print('using: ' + request.meta['proxy'])
+
+        proxy_user_pass = '*****:*****'
+        encoded_user_pass = base64.b64encode(proxy_user_pass.encode())
+        request.headers['Proxy-Authorization'] = 'Basic ' + encoded_user_pass.decode()
 
 class VeggieScraperSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
